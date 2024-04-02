@@ -90,9 +90,25 @@ while rounds_played < num_rounds:
 
     # Rounds headings
     if mode == "infinite":
-        rounds_heading = f"\n Round {rounds_played} (Infinite mode) "
+        rounds_heading = f"\n Round {rounds_played + 1} (Infinite mode) "
     else:
         rounds_heading = f"\n 🕐🕐🕐 Round {rounds_played + 1} of {num_rounds} 🕐🕐🕐"
 
     print(rounds_heading)
     print()
+
+    user_choice = input("Choose: ")
+
+    if user_choice == "xxx":
+        break
+
+    rounds_played += 1
+
+    # if users are in infinite mode, increase number of rounds!
+    if mode == "infinite":
+        num_rounds += 1
+
+
+# Game loop ends here
+
+# Game History / Statistics area
