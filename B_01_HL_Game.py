@@ -1,3 +1,6 @@
+import math
+
+
 # checks users yes (y) or no (n)
 def yes_no(question):
     while True:
@@ -37,8 +40,10 @@ Good luck.
     ''')
 
 
-# checks for an integer more than 0 (allows <enter>)
-def int_check(question):
+# checks for an integer with optimal upper /
+# lower limit and an optimal exit code for infinite mode
+# / quiting the game
+def int_check(question, low=None, high=None, exit_code=None):
 
     while True:
 
@@ -63,6 +68,15 @@ def int_check(question):
             print(error)
 
 
+# calculate the number of guesses allowed
+def calc_guesses(low, high):
+    num_range = high - low + 1
+    max_raw = math.log2(num_range)
+    max_upped = math.ceil(max_raw)
+    max_guesses = max_upped + 1
+    return max_guesses
+
+
 # Main Routine starts here
 
 # Initialise game variables
@@ -79,11 +93,17 @@ if want_instructions == "yes":
     instructions()
 
 # Ask user for number of rounds / infinite mode
-num_rounds = int_check("How many rounds do you like? Push <enter> for infinite mode: ")
+num_rounds = int_check("Rounds <enter for infinite>: ",
+                       low=1, exit_code="")
 
 if num_rounds == "infinite":
     mode = "infinite"
     num_rounds = 5
+
+# Get game parameters
+low_num = int_check("Low number?")
+high_num = int_check("High number? ", low=low_num+1)
+guesses_allowed = calc_guesses(low_num, high_num)
 
 # Game loop starts here
 while rounds_played < num_rounds:
