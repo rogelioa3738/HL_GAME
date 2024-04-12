@@ -31,7 +31,7 @@ def int_check(question, low=None, high=None, exit_code=None):
 
             # Check response is more than the low number
             elif high is not None and response > high:
-                print (error)
+                print(error)
 
             # If response is valid, return it
             else:
